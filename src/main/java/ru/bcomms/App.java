@@ -1,7 +1,15 @@
 package ru.bcomms;
 
-public class Main {
+import ru.bcomms.databases.NotesDatabase;
+import ru.bcomms.notes.core.application.ConcreteNoteEditor;
+import ru.bcomms.notes.infrastructure.DatabaseContext;
+import ru.bcomms.notes.presentation.queries.controllers.NotesController;
+import ru.bcomms.notes.presentation.queries.views.NotesConsolePresenter;
+
+public class App {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        NotesController notesController = new NotesController(
+                new ConcreteNoteEditor(new DatabaseContext(new NotesDatabase()), new NotesConsolePresenter()));
+        notesController.routeGetAll();
     }
 }
